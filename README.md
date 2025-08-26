@@ -1,2 +1,2 @@
-# Smartspend
-"AI-powered expense tracker for small businesses to monitor income and spending.
+#cv builder
+help people build perfect cv
