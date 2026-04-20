@@ -1,24 +1,30 @@
 package main
 
 import (
-	"fmt"
-	"regexp"
+	"strconv"
+	"strings"
 )
 
-func fixArticles(s string) string {
-	// handles vowels
-	re := regexp.MustCompile(`\b([Aa])\s+([aeiouAEIOU]\w*)`)
-	s = re.ReplaceAllString(s, "${1}n $2")
-	// handles silent "h"
-	re2 := regexp.MustCompile(`\b([Aa])\s+(honour|honest|hour|heir)\b`)
-	s = re2.ReplaceAllString(s, "$[1]n $2")
-	// handles normal "h"
-	re3 := regexp.MustCompile(`\b([Aa])n\s+([^aeiouAEIOU]\W*)`)
-	s = re3.ReplaceAllString(s, "${1}n $2")
-
-	return s
-}
-func main() {
-	fmt.Println(fixArticles("a amazzing day"))
-	fmt.Println(fixArticles("an house there"))
+func convertN(s string) string {
+	words := strings.Fields(s)
+	for i := 0; i < len(words); i++ {
+		if strings.HasPrefix(words[i], "(") && !strings.HasSuffix(words[i], ")") {
+			a := words[i] + words[i+1]
+			a = strings.Trim(a, "()")
+			b := strings.Split(a, ",")
+			c, _ := strconv.Atoi(b[1])
+			for j := i - c; j < i; j++ {
+				switch b[0] {
+				case "up":
+					words[j] = strings.ToUpper(words[j])
+				case "low":
+					words[j] = strings.ToLower(words[j])
+				case "cap":
+					words[j] = strings.Title(words[j])
+				}
+			}
+			words = append(words[:i], words[i+2:]...)
+		}
+	}
+	return strings.Join(words, " ")
 }

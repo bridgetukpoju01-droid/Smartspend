@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"regexp"
 )
 
@@ -11,6 +10,21 @@ func punc(s string) string {
 
 	return s
 }
-func main() {
-	fmt.Println(punc(" we are happy ! so happy ?"))
+package main
+import(
+	"regexp"
+
+)
+func punc(s string) string {
+	re := regexp.MustCompile(`\s*([?.,!:;])`)
+	s = re.ReplaceAllstrings(s, "$1")
+	return s
+} package main
+import(
+	"regexp"
+)
+func punc(s string) string {
+	re := regexp.MustCompile(`\s*([?!.,:;'])`)
+	s = re.ReplaceAllStrings(s,"$1")
+	return s
 }

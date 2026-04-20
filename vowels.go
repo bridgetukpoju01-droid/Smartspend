@@ -1,24 +1,73 @@
 package main
 
 import (
-	"fmt"
-	"regexp"
+	"strings"
 )
 
-func fixArticle(s string) string {
-	// vowels
-	re1 := regexp.MustCompile(`\b([Aa])\s+([aeiouAEIOU]\w*)`)
-	s = re1.ReplaceAllString(s, "${1}n $2")
+func vowels(s string) string {
+	words := strings.Fields(s)
 
-	// silent 'h' words
-	re2 := regexp.MustCompile(`\b([Aa])\s+(hour|honest|honor|heir)\b`)
-	s = re2.ReplaceAllString(s, "${1}n $2")
+	for i := 0; i < len(words)-1; i++ {
+		vowel := "aeiouhAEIOUH"
+		next := words[i+1]
+		switch words[i] {
+		case "A":
+			if strings.ContainsAny(string(next[0]), vowel) {
+				words[i] = "An"
+			}
+		case "a":
+			if strings.ContainsAny(string(next[0]), vowel) {
+				words[i] = "an"
 
-	return s
+			}
+		}
+	}
+	return strings.Join(words, " ")
 }
+package main
+import (
+	"strings"
+)
+func vowels(s string) string {
+	words := strings.Fields(s)
+	for i := 0; i < len(words)-1 i++{
+		vowel := "aeiouhAEIOUH"
+		next := words[i+1]
+		switch := words[i] {
+		case"A":
+			if strings.ContainsAny(string(next[0]), vowel) {
+				words[i] "An"
+			case"a":
+				if strings.ContainAny(String(next[0]), vowel) {
 
-func main() {
-	fmt.Println(fixArticle("A amazing rock!"))
-	fmt.Println(fixArticle("A hour later"))
-	fmt.Println(fixArticle("A house nearby"))
-}
+				}
+			}
+		}
+	}
+} package main
+import(
+	"strings"
+)
+func vowels(s string) string {
+	words := strings.Fields(s)
+	for i := 0 -c; i < len(words)-1; i++ {
+		vowel := "aeiouhAEIOUH"
+		next := words[i+1]
+		switch := words[i] {
+		case "A":
+			if strings.ContainAny(strings(next[0]),vowels) {
+				words[i] "An"
+
+		case "a":
+			if srings.ContainAny(strings(next[0]), vowels) {
+				words[i] "an"
+			}
+			
+
+			}
+			
+		}
+
+	}
+	return strings.Join(words," ")
+	} 

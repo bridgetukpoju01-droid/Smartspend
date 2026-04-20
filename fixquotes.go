@@ -1,21 +1,12 @@
 package main
 
 import (
-	"fmt"
-	"strings"
+	"regexp"
 )
 
 func fixquotes(text string) string {
-	// handle single quotes
-	text = strings.ReplaceAll(text, "' ", "'")
-	text = strings.ReplaceAll(text, " '", "'")
-	// handles double quotes
-	text = strings.ReplaceAll(text, "\"", "\"")
-	text = strings.ReplaceAll(text, "\" ", "\"")
+	re := regexp.MustCompile(`'\s*(.*?)\s*'`)
+	text = re.ReplaceAllString(text, "'$1'")
 
 	return text
-}
-func main() {
-	fmt.Println(fixquotes(" ' we are happy ' "))
-	fmt.Println(fixquotes("\" where are you\""))
 }
